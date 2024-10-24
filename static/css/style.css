@@ -1,0 +1,75 @@
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+div.model-accuracies {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+div.model-accuracies p {
+    flex: 1;
+    background: #f9f9f9;
+    padding: 15px;
+    margin: 5px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    font-size: 1.1rem;
+}
+
+canvas {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #999;
+}

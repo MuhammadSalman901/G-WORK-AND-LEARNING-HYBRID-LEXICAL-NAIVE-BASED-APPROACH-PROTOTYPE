@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Accuracy Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Model Accuracy Dashboard</h1>
+        
+        <div class="card">
+            <h2>Accuracy of Models</h2>
+            <p>Lexical Model: <span class="accuracy">{{ accuracies['lexical'] }}%</span></p>
+            <p>Naive Bayes Model: <span class="accuracy">{{ accuracies['naive_bayes'] }}%</span></p>
+            <p>Hybrid Model: <span class="accuracy">{{ accuracies['hybrid'] }}%</span></p>
+        </div>
+
+        <div class="card">
+            <h2>Comparison Graph</h2>
+            <canvas id="comparisonChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var accuracies = JSON.parse('{{ accuracies | tojson | safe }}');
+
+            var ctx = document.getElementById('comparisonChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Lexical', 'Naive Bayes', 'Hybrid'],
+                    datasets: [{
+                        label: 'Accuracy',
+                        data: [
+                            accuracies.lexical,
+                            accuracies.naive_bayes,
+                            accuracies.hybrid
+                        ],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(75, 192, 192, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1,
+                        hoverBackgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#555',
+                                font: {
+                                    size: 14,
+                                },
+                            },
+                            grid: {
+                                color: 'rgba(200, 200, 200, 0.2)',
+                            },
+                        },
+                        x: {
+                            ticks: {
+                                color: '#555',
+                                font: {
+                                    size: 14,
+                                },
+                            },
+                            grid: {
+                                color: 'rgba(200, 200, 200, 0.2)',
+                            },
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
